@@ -2,8 +2,12 @@ const container = document.getElementById('root');
  function customReact(reactElem,container){
          const dom  = document.createElement(reactElem.type)
                dom.innerHTML = reactElem.children
-               dom.setAttribute('href',reactElem.props.href);
-               dom.setAttribute('target',reactElem.props.target)
+            //    dom.setAttribute('href',reactElem.props.href);
+            //    dom.setAttribute('target',reactElem.props.target)
+            for (const prop in reactElem.props) {
+                if(prop === 'children')continue;
+                dom.setAttribute(prop,reactElem.props[prop])
+             }
           container.appendChild(dom);
            
  }
