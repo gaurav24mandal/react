@@ -9,7 +9,7 @@ function createEle(type, props,children){
                 }
   
     
-     function render(createEle,container){
+     function render(createEle){
                    const   reactElem = document.createElement(createEle.tag);
                       for (const prop in createEle.prop) {
                         if(prop ==='children') continue ;
@@ -21,29 +21,37 @@ function createEle(type, props,children){
                   
                      }
                      if(typeof createEle.children === 'string'){
-                          reactElem.innerHTML = createEle.children;
-                            return reactElem
+                        reactElem.appendChild(document.createTextNode(createEle.children));
+                           
                      }
                       else if(typeof createEle.children === 'object' && !Array.isArray(createEle.children)){
-                          reactElem.appendChild(render(createEle.children,reactElem))
-                            return reactElem
+                          reactElem.appendChild(render(createEle.children))
+                           
                       }
                       else if(Array.isArray(createEle.children)){
                          createEle.children.forEach(children => {
-                             reactElem.appendChild(render(children,reactElem))
+                            if(typeof children === 'string'){
+                                reactElem.appendChild(document.createTextNode(children));
+                            }
+                            else{
+                                reactElem.appendChild(render(children))
+                            }
+                             
                                
                          }) 
-                       return reactElem
+                       
                      }
+                     return reactElem
                       
                 }
     
 
-                container.appendChild(render(createEle('div', { id: 'root' }, [
-                    createEle('a', { href: 'https://example.com', target: '_blank' }, 'Link to Example'),
-                    createEle('p', {}, 'Some paragraph text here.')
+                container.appendChild(render(createEle('div', { id: 'container' }, [
+                    'This is some text before ',
+                    createEle('span', { class: 'highlight',style:"color: blue" }, 'this part is highlighted'),
+                    ' and this is after the span.'
                   ])
                   
                   
-                      ))
+          ))
             
