@@ -1,23 +1,31 @@
 import React from 'react'
+import { useState } from 'react'
 
+function cartCounter(){
+    
+}
 
-function Card({username,gravity}) {
+function Card({cartCounter,itemName,ItemAdded, imageLink}) {
   return (
-    <div >
-      <div class="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5">
-  <div >
-    <span class="inline-flex items-center justify-center rounded-md bg-indigo-500 p-2 shadow-lg">
-      <svg class="h-6 w-6 stroke-white" >
-        
-      </svg>
-    </span>
-  </div>
-  <h3 class="text-gray-900 dark:text-white mt-5 text-base font-medium tracking-tight ">{username}</h3>
-  <p class="text-gray-500 dark:text-gray-400 mt-2 text-sm mg-5">
-    The Zero Gravity{gravity} Pen can be used to write in any orientation, including upside-down. It even works in outer space.
-  </p>
-</div>
+    <div className="max-w-xs p-6 rounded-md shadow-md bg-black">
+    <img
+      src= {imageLink}
+      alt="item 1"
+      className="object-cover object-center w-full rounded-md h-72 bg-gray-500"
+    />
+    <div className="mt-6 mb-2">
+      <span className="block text-sm font-medium font-mono tracking-widest uppercase text-indigo-400">
+         {itemName} 
+      </span>
+      <span>
+
+      </span>
+      <h1 className="text-xl font-semibold tracking-wide"></h1>
     </div>
+    <button className="text-gray-300" onClick={cartCounter}>
+      Add to cart
+    </button>
+  </div>
   )
 }
 
