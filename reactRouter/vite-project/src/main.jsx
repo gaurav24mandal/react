@@ -8,6 +8,7 @@ import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
 import User from './components/User.jsx'
 import Github, { FectchApi } from './components/Github.jsx'
+import Privacy from './components/Privacy.jsx'
  const router  = createBrowserRouter([
   {
     path : "/",
@@ -35,6 +36,10 @@ import Github, { FectchApi } from './components/Github.jsx'
         element:<Github/>,
         loader:FectchApi
         
+      },
+      {
+        path: "privacy",
+        element : <Privacy/>
       }
     ]
   }
