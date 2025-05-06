@@ -1,15 +1,17 @@
 import React from 'react'
 import ContextProvider from './context/ContextProvider'
- import Login from './components/Login'
-import Profile from './components/Profile'
+ import UserLogin from './components/UserLogin'
+
+import Userprofile from './components/Userprofile'
+import UserContextProvider from './context/UserContextProvider'
 function App() {
 
 
   return (
-    <ContextProvider>
-       <Login/>
-       <Profile/>
-     </ContextProvider>
+    <UserContextProvider>
+       <UserLogin/>
+       <Userprofile/>
+     </UserContextProvider>
   )
 }
 
