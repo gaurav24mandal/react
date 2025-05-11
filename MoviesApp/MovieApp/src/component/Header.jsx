@@ -1,8 +1,59 @@
-import React from 'react'
-import {Link , NavLink} from 'react-router-dom'
+import React, {useState} from 'react'
+import {Link , NavLink , useLocation} from 'react-router-dom'
 import useLogin from '../context/loginContext'
+import useMovie from '../context/MovieContext'
 function Header() {
   const {isLogin , setIsLogin, username , setUsername} = useLogin()
+  const {addMovie} = useMovie();
+  const [movieName , setMovieName] = useState("")
+  const location = useLocation();
+  const isMoviesPage = location.pathname === '/movies';
+  
+  
+  
+
+ 
+  async function moviesDetail() {
+    if (!movieName.trim()) return;
+    const URL = `http://www.omdbapi.com/?apikey=67fc28a4&s=${movieName}`
+       try
+        {
+           const res =  await fetch(URL) 
+             const data = await res.json()
+           console.log(data);
+            if(data.Search)   {
+             const movies = data.Search.map((movie)=>({
+                 movieId : movie.imdbID,
+                 movieName : movie.Title,
+                 movieSrc : movie.Poster
+             }))
+             addMovie(movies)
+             console.log(movies);
+             
+            } 
+       } 
+       catch (error) {
+            console.log(error);
+            
+       }
+     
+       
+  }
+const submitMovieHandler = (e)=>{
+   
+    if(e.key === 'Enter'){
+        
+        moviesDetail()
+       
+        
+    }
+}
+
+
+
+
+
+
   return (
     <header className='shadow sticky z-50 top-0'>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -43,12 +94,12 @@ function Header() {
                     </li>
                     <li>
                         <NavLink
-                        to="/about"
+                        to="/movies"
                             className={({isActive}) =>
-                                `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 `
                             }
                         >
-                            About
+                            Movies
                         </NavLink>
                     </li>
                     <li>
@@ -62,6 +113,13 @@ function Header() {
                         </NavLink>
                     </li>
                     </ul>
+                      {isLogin && isMoviesPage ?<input type="text" 
+                               className='m-8 p-4 bg-gray-100  '
+                               placeholder='search movies'
+                               value={movieName}
+                               onChange={(e)=>setMovieName(e.target.value)}
+                               onKeyDown={submitMovieHandler}
+                      />:null}
                     </div>
             </div>
       </nav>

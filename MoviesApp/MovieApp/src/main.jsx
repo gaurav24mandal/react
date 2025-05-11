@@ -7,7 +7,7 @@ import Home from './component/Home.jsx'
 import LoginPage from './component/LoginPage.jsx'
 import Movies from './component/Movies.jsx'
 import useLogin, { LoginContextWrapper } from './context/loginContext.jsx'
-
+import useMovie ,{MovieProvider} from './context/MovieContext.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path = "/" element ={<App />}>
@@ -21,8 +21,10 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-<LoginContextWrapper  >
-<RouterProvider  router ={router}/>
-</LoginContextWrapper>
+    <MovieProvider>
+      <LoginContextWrapper>
+        <RouterProvider router={router} />
+      </LoginContextWrapper>
+    </MovieProvider>
   </StrictMode>
 )

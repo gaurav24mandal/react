@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import useLogin from '../context/loginContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation } from 'react-router-dom';
 ;
 
 function LoginPage() {
@@ -12,7 +12,7 @@ function LoginPage() {
   const handleSubmit =(e)=>{
       e.preventDefault();
       console.log(username);
-      setIsLogin(true)
+      setIsLogin(!isLogin)
       setUsername(username)
        navigate('/movies')
        

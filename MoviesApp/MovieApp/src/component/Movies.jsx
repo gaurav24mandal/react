@@ -1,43 +1,18 @@
-import React from 'react'
-import useLogin from '../context/loginContext'
-import { useState ,useEffect } from 'react'
+
+import React from "react";
+import useMovie from "../context/MovieContext";
+
 function Movies() {
-   const {username} = useLogin()  
-   const URL = "http://www.omdbapi.com/?apikey=67fc28a4&s=titanic"
-     
-   const [movieInfo , setMovieInfo] = useState([])
-   const [isFav, setIsFav] = useState(false)
-   let imgsrc = ""
-   async function moviesDetail() {
-        try {
-            const res =  await fetch(URL) 
-            const data =  await res.json()
-            console.log(data.Search);
-            data.Search.map((m)=>{
-                console.log(m.Title);
-                
-            })
-         imgsrc =data.Search[0].Poster;
-           
-           
-            
-        } catch (error) {
-             console.log(error);
-             
-        }
-      
-        
-   }
-   moviesDetail()
-   
+  const { movieDetails } = useMovie();
+
   return (
-      <div className='w-70 p-8'>
-<div className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <a href="/">
-                <img className="p-8 rounded-t-lg" src= "https://m.media-amazon.com/images/M/MV5BYzYyN2FiZmUtYWYzMy00MzViLWJkZTMtOGY1ZjgzNWMwN2YxXkEyXkFqcGc@._V1_SX300.jpg" />
-            </a>
-            <div className="px-5 pb-5">
-                <a href="/">
+    <div className="w-full  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 bg-gray-600 gap-4 p-4">
+      {movieDetails.map((movie) => (
+        <div key={movie.movieId}>
+          <h3>{movie.movieName}</h3>
+          <img className="p-8 rounded-t-lg" src={movie.movieSrc} alt={movie.movieName}/>
+          <div className="px-5 pb-5">
+          <a href="/">
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                            
                     </h5>
@@ -91,9 +66,8 @@ function Movies() {
                     <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
                         4.0
                     </span>
-                </div>
-                <div className="flex items-center justify-between">
-                    <span className=" font-bold text-gray-900 dark:text-white">$599</span>
+                    <div className="flex items-center justify-between">
+                    
                     <a
                         href="/"
                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -101,11 +75,14 @@ function Movies() {
                         fav
                     </a>
                 </div>
-            </div>
-        </div>
+                    
+                </div>
 
-      </div>
-  )
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default Movies
+export default Movies;
