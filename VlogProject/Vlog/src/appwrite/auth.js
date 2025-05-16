@@ -39,7 +39,7 @@ export class Authservice {
         try {
             return await this.account.get() 
         } catch (error) {
-             console.log(`erriin getCUrrenlt : ${error}`);
+            console.log("Appwrite serive :: getCurrentUser :: error", error);
           }
           return null
     }
