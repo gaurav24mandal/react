@@ -14,21 +14,17 @@ function Login() {
    
    
     const Handlelogin = async (data)=>{
-      
+      setError("")
       try {
-         setError("")
-         const user = await Service.getCurrentUser();
-         if (user) {
-           dispatch(login(user));
-           navigate("/");
-         } else {
-           const session = await Service.login({ email, password });
+          await Service.logout();
+           const session = await Service.login(data);
            if (session) {
              const user = await Service.getCurrentUser();
-             dispatch(login(user));
+             if(user) dispatch(login(user));
+              
              navigate("/");
            }
-         }
+         
       } catch (error) {
           console.log(`error in loging component ${error}`);
           setError(error.message)

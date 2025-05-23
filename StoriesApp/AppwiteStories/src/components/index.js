@@ -7,6 +7,10 @@ import Logo from "./Logo";
 import Signup from "./signup";
 import Containers from "./containers/Containers";
 import Logout from "./Logout";
+import Editor from "./Editor";
+import Select from "./Select";
+import PostCard from "./Postcard";
+import Postform from "./Postform/Postform";
 
 export {
     Header,
@@ -17,5 +21,9 @@ export {
     Logo,
     Signup,
     Containers,
-    Logout
+    Logout,
+    Editor,
+    Select,
+    PostCard,
+    Postform
 }

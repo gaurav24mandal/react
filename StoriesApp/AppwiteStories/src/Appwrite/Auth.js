@@ -31,7 +31,7 @@ constructor(){
    }
    getCurrentUser = async ()=>{
          try {
-             await this.account.get()
+            
              const userData = await this.account.get();
              return userData
          } catch (error) {

@@ -13,18 +13,17 @@ function Signup() {
    const [error , setError ] = useState("")
 
    const create =  async(data)=>{
+     setError("")
            try {
-              setError("")
-               const session = await Service.createAccount(data);
-                if(session){
+              await Service.logout();
+                const  userdata =await Service.createAccount(data);
+                if(userdata){
                     const user = await Service.getCurrentUser();
                     if(user){
                         dispatch(login(user))
-                        navigate("/")
-                    }
-                    else {
-                        navigate("/signup")
-                    }
+                       }
+                       navigate("/")
+                   
                 }
            } catch (error) {
                 console.log(`error in signup component ${error}`);

@@ -19,7 +19,7 @@ function Logout() {
           }
     }
   return (
-    <Button className='inline-bock px-6 py-2 duration-200 hover:bg-red-100 rounded-full' onClick = {handleDelete}>
+    <Button className='inline-bock px-6 py-2 duration-200 hover:!bg-red-600 rounded-full' onClick = {handleDelete}>
         Logout
     </Button>
   )
